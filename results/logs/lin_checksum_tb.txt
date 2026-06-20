@@ -1,0 +1,187 @@
+================================================================
+   LIN CHECKSUM ENGINE: COMPREHENSIVE VERIFICATION
+================================================================
+  [MONITOR] checksum = 0xff at 5000 ns
+
+  [TEST] Spec Page 52 Example
+    Mode:  Classic, PID: 0x00
+    Data Bytes: 0x4a 0x55 0x93 0xe5 
+  [MONITOR] checksum = 0xb5 at 265000 ns
+  [MONITOR] checksum = 0x60 at 295000 ns
+  [MONITOR] checksum = 0xcc at 325000 ns
+  [MONITOR] checksum = 0xe6 at 355000 ns
+    [PASS] Checksum: 0xe6 (Expected: 0xe6)
+
+  [TEST] Single Byte 0x00
+    Mode:  Classic, PID: 0x00
+    Data Bytes: 0x00 
+  [MONITOR] checksum = 0xff at 535000 ns
+    [PASS] Checksum: 0xff (Expected: 0xff)
+
+  [TEST] Single Byte 0x55
+    Mode:  Classic, PID: 0x00
+    Data Bytes: 0x55 
+  [MONITOR] checksum = 0xaa at 795000 ns
+    [PASS] Checksum: 0xaa (Expected: 0xaa)
+
+  [TEST] Single Byte 0xFF
+    Mode:  Classic, PID: 0x00
+    Data Bytes: 0xff 
+  [MONITOR] checksum = 0xff at 975000 ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'lin_checksum_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+run all
+  [MONITOR] checksum = 0x00 at 1015000 ns
+    [PASS] Checksum: 0x00 (Expected: 0x00)
+
+  [TEST] Two Bytes 0x01,0x02
+    Mode:  Classic, PID: 0x00
+    Data Bytes: 0x01 0x02 
+  [MONITOR] checksum = 0xff at 1195000 ns
+  [MONITOR] checksum = 0xfe at 1235000 ns
+  [MONITOR] checksum = 0xfc at 1265000 ns
+    [PASS] Checksum: 0xfc (Expected: 0xfc)
+
+  [TEST] Two Bytes with Carry (0xFF,0x01)
+    Mode:  Classic, PID: 0x00
+    Data Bytes: 0xff 0x01 
+  [MONITOR] checksum = 0xff at 1445000 ns
+  [MONITOR] checksum = 0x00 at 1485000 ns
+  [MONITOR] checksum = 0xfe at 1515000 ns
+    [PASS] Checksum: 0xfe (Expected: 0xfe)
+
+  [TEST] 8 Bytes of 0x00
+    Mode:  Classic, PID: 0x00
+    Data Bytes: 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 
+  [MONITOR] checksum = 0xff at 1695000 ns
+    [PASS] Checksum: 0xff (Expected: 0xff)
+
+  [TEST] 8 Bytes of 0xFF
+    Mode:  Classic, PID: 0x00
+    Data Bytes: 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 
+  [MONITOR] checksum = 0x00 at 2165000 ns
+    [PASS] Checksum: 0x00 (Expected: 0x00)
+
+  [TEST] Enhanced Spec Example (PID=0x83)
+    Mode: Enhanced, PID: 0x83
+    Data Bytes: 0x4a 0x55 0x93 0xe5 
+  [MONITOR] checksum = 0x7c at 2555000 ns
+  [MONITOR] checksum = 0x32 at 2595000 ns
+  [MONITOR] checksum = 0xdc at 2625000 ns
+  [MONITOR] checksum = 0x49 at 2655000 ns
+  [MONITOR] checksum = 0x63 at 2685000 ns
+    [PASS] Checksum: 0x63 (Expected: 0x63)
+
+  [TEST] Enhanced Single Byte
+    Mode: Enhanced, PID: 0x01
+    Data Bytes: 0x00 
+  [MONITOR] checksum = 0xfe at 2865000 ns
+    [PASS] Checksum: 0xfe (Expected: 0xfe)
+
+  [TEST] Enhanced with Carry
+    Mode: Enhanced, PID: 0xff
+    Data Bytes: 0x01 
+  [MONITOR] checksum = 0x00 at 3085000 ns
+  [MONITOR] checksum = 0xfe at 3125000 ns
+    [PASS] Checksum: 0xfe (Expected: 0xfe)
+
+  [TEST] Enhanced Multiple Carries
+    Mode: Enhanced, PID: 0x80
+    Data Bytes: 0x80 0x80 0x80 0x80 
+  [MONITOR] checksum = 0x7f at 3305000 ns
+  [MONITOR] checksum = 0xfe at 3345000 ns
+  [MONITOR] checksum = 0x7e at 3375000 ns
+  [MONITOR] checksum = 0xfd at 3405000 ns
+  [MONITOR] checksum = 0x7d at 3435000 ns
+    [PASS] Checksum: 0x7d (Expected: 0x7d)
+
+  [TEST] Master Request Frame (PID=0x3C)
+    Mode: Enhanced, PID: 0x3c
+    Data Bytes: 0x01 0x02 0x03 
+  [MONITOR] checksum = 0xc3 at 3615000 ns
+  [MONITOR] checksum = 0xc2 at 3655000 ns
+  [MONITOR] checksum = 0xc0 at 3685000 ns
+  [MONITOR] checksum = 0xbd at 3715000 ns
+    [PASS] Checksum: 0xbd (Expected: 0xbd)
+
+  [TEST] Slave Response Frame (PID=0x3D)
+    Mode: Enhanced, PID: 0x3d
+    Data Bytes: 0x04 0x05 0x06 
+  [MONITOR] checksum = 0xc2 at 3895000 ns
+  [MONITOR] checksum = 0xbe at 3935000 ns
+  [MONITOR] checksum = 0xb9 at 3965000 ns
+  [MONITOR] checksum = 0xb3 at 3995000 ns
+    [PASS] Checksum: 0xb3 (Expected: 0xb3)
+
+  [TEST] PID=0xFF, Data=0x00
+    Mode: Enhanced, PID: 0xff
+    Data Bytes: 0x00 
+  [MONITOR] checksum = 0x00 at 4175000 ns
+    [PASS] Checksum: 0x00 (Expected: 0x00)
+
+  [TEST] Maximum Sum Test
+    Mode:  Classic, PID: 0x00
+    Data Bytes: 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xfe 
+  [MONITOR] checksum = 0xff at 4395000 ns
+  [MONITOR] checksum = 0x00 at 4435000 ns
+  [MONITOR] checksum = 0x01 at 4645000 ns
+    [PASS] Checksum: 0x01 (Expected: 0x01)
+
+  [TEST] Alternating Pattern 0x55,0xAA
+    Mode:  Classic, PID: 0x00
+    Data Bytes: 0x55 0xaa 0x55 0xaa 0x55 0xaa 
+  [MONITOR] checksum = 0xff at 4825000 ns
+  [MONITOR] checksum = 0xaa at 4865000 ns
+  [MONITOR] checksum = 0x00 at 4895000 ns
+  [MONITOR] checksum = 0xaa at 4925000 ns
+  [MONITOR] checksum = 0x00 at 4955000 ns
+  [MONITOR] checksum = 0xaa at 4985000 ns
+  [MONITOR] checksum = 0x00 at 5015000 ns
+    [PASS] Checksum: 0x00 (Expected: 0x00)
+
+  [TEST] Sensor Reading: 0x0F, 0x42
+    Mode: Enhanced, PID: 0x21
+    Data Bytes: 0x0f 0x42 
+  [MONITOR] checksum = 0xde at 5195000 ns
+  [MONITOR] checksum = 0xcf at 5235000 ns
+  [MONITOR] checksum = 0x8d at 5265000 ns
+    [PASS] Checksum: 0x8d (Expected: 0x8d)
+
+  [TEST] Actuator Control: 0x80
+    Mode: Enhanced, PID: 0x15
+    Data Bytes: 0x80 
+  [MONITOR] checksum = 0xea at 5445000 ns
+  [MONITOR] checksum = 0x6a at 5485000 ns
+    [PASS] Checksum: 0x6a (Expected: 0x6a)
+
+  [TEST] Diagnostic Request (Classic)
+    Mode:  Classic, PID: 0x00
+    Data Bytes: 0xaa 0xbb 0xcc 0xdd 
+  [MONITOR] checksum = 0xff at 5665000 ns
+  [MONITOR] checksum = 0x55 at 5705000 ns
+  [MONITOR] checksum = 0x99 at 5735000 ns
+  [MONITOR] checksum = 0xcc at 5765000 ns
+  [MONITOR] checksum = 0xee at 5795000 ns
+    [PASS] Checksum: 0xee (Expected: 0xee)
+
+  [TEST] Diagnostic Response (Classic)
+    Mode:  Classic, PID: 0x00
+    Data Bytes: 0x11 0x22 0x33 0x44 0x55 
+  [MONITOR] checksum = 0xff at 5975000 ns
+  [MONITOR] checksum = 0xee at 6015000 ns
+  [MONITOR] checksum = 0xcc at 6045000 ns
+  [MONITOR] checksum = 0x99 at 6075000 ns
+  [MONITOR] checksum = 0x55 at 6105000 ns
+  [MONITOR] checksum = 0x00 at 6135000 ns
+    [PASS] Checksum: 0x00 (Expected: 0x00)
+
+================================================================
+   TEST RESULTS SUMMARY
+================================================================
+ Total Tests:  21
+ Passed:       21
+ Failed:       0
+ Success Rate: 100.0%
+
+*** ALL TESTS PASSED! LIN CHECKSUM ENGINE IS READY! ***
+$finish called at time : 6285 ns : File "C:/Users/gokul/OneDrive/Documents/Documents/Electronics/6th sem/system verilog/PBL/NEW/LIN/tb/lin_checksum_tb.sv" Line 185

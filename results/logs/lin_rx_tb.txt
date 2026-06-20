@@ -1,0 +1,182 @@
+================================================================
+   LIN Receiver: Automotive Compliance Testbench
+================================================================
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'lin_rx_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+run all
+
+========== TEST 1: Valid Break + Valid Sync ==========
+
+[76495000 ns] ---> Sending Break: 13.0 LOW, 1.0 HIGH bits
+[112335000 ns]      -> Sending Byte: 0x55
+  >>> [112355000 ns] *** BREAK DETECTED! ***
+  >>> [136665000 ns] --> BYTE RECEIVED: 0x55
+
+========== TEST 2: Full Frame Reception ==========
+
+[163535000 ns] ---> Sending Break: 14.0 LOW, 1.5 HIGH bits
+[203215000 ns]      -> Sending Byte: 0x55
+  >>> [203235000 ns] *** BREAK DETECTED! ***
+  >>> [227545000 ns] --> BYTE RECEIVED: 0x55
+[228815000 ns]      -> Sending Byte: 0x83
+  >>> [253145000 ns] --> BYTE RECEIVED: 0x83
+[254415000 ns]      -> Sending Byte: 0x01
+  >>> [278745000 ns] --> BYTE RECEIVED: 0x01
+[280015000 ns]      -> Sending Byte: 0x02
+  >>> [304345000 ns] --> BYTE RECEIVED: 0x02
+[305615000 ns]      -> Sending Byte: 0x03
+  >>> [329945000 ns] --> BYTE RECEIVED: 0x03
+
+========== TEST 3: Long Break (20 bits) ==========
+
+[382415000 ns] ---> Sending Break: 20.0 LOW, 1.0 HIGH bits
+[436175000 ns]      -> Sending Byte: 0x55
+  >>> [436195000 ns] *** BREAK DETECTED! ***
+  >>> [460505000 ns] --> BYTE RECEIVED: 0x55
+[461775000 ns]      -> Sending Byte: 0xaa
+  >>> [486105000 ns] --> BYTE RECEIVED: 0xaa
+
+========== TEST 4: Short Break - 10 bits (Should Fail) ==========
+
+[512975000 ns] ---> Sending Break: 10.0 LOW, 1.0 HIGH bits
+[541135000 ns]      -> Sending Byte: 0x55
+  >>> [565465000 ns] --> BYTE RECEIVED: 0x55
+
+========== TEST 5: Very Short Break - 8 bits (Should Fail) ==========
+
+[592335000 ns] ---> Sending Break: 8.0 LOW, 1.0 HIGH bits
+[615375000 ns]      -> Sending Byte: 0x55
+  >>> [616665000 ns] !!! FRAMING ERROR! !!!
+  >>> [644825000 ns] --> BYTE RECEIVED: 0xd5
+
+========== TEST 6: Short Delimiter (0.5 bits - Should Error) ==========
+
+[666575000 ns] ---> Sending Break: 13.0 LOW, 0.5 HIGH bits
+[701135000 ns]      -> Sending Byte: 0x55
+  >>> [701155000 ns] !!! FRAMING ERROR! !!!
+  >>> [725465000 ns] --> BYTE RECEIVED: 0x55
+
+========== TEST 7: Missing Delimiter (0 bits - Should Error) ==========
+[785615000 ns]      -> Sending Byte: 0x55
+  >>> [790755000 ns] *** BREAK DETECTED! ***
+  >>> [815065000 ns] --> BYTE RECEIVED: 0xd5
+
+========== TEST 8: Missing Stop Bit (Should Error) ==========
+
+[836815000 ns] ---> Sending Break: 13.0 LOW, 1.0 HIGH bits
+  >>> [872675000 ns] *** BREAK DETECTED! ***
+
+========== TEST 9: Back-to-Back Frames ==========
+
+[928975000 ns] ---> Sending Break: 13.0 LOW, 1.0 HIGH bits
+[964815000 ns]      -> Sending Byte: 0x55
+  >>> [964835000 ns] *** BREAK DETECTED! ***
+  >>> [989145000 ns] --> BYTE RECEIVED: 0x55
+[990415000 ns]      -> Sending Byte: 0xaa
+  >>> [1014745000 ns] --> BYTE RECEIVED: 0xaa
+[1016015000 ns]      -> Sending Byte: 0xbb
+  >>> [1040345000 ns] --> BYTE RECEIVED: 0xbb
+
+[1054415000 ns] ---> Sending Break: 13.0 LOW, 1.0 HIGH bits
+[1090255000 ns]      -> Sending Byte: 0x55
+  >>> [1090275000 ns] *** BREAK DETECTED! ***
+  >>> [1114585000 ns] --> BYTE RECEIVED: 0x55
+[1115855000 ns]      -> Sending Byte: 0xcc
+  >>> [1140185000 ns] --> BYTE RECEIVED: 0xcc
+[1141455000 ns]      -> Sending Byte: 0xdd
+  >>> [1165785000 ns] --> BYTE RECEIVED: 0xdd
+
+========== TEST 10: Different Data Patterns ==========
+
+[1218255000 ns] ---> Sending Break: 13.0 LOW, 1.0 HIGH bits
+[1254095000 ns]      -> Sending Byte: 0x55
+  >>> [1254115000 ns] *** BREAK DETECTED! ***
+  >>> [1278425000 ns] --> BYTE RECEIVED: 0x55
+[1279695000 ns]      -> Sending Byte: 0x00
+  >>> [1304025000 ns] --> BYTE RECEIVED: 0x00
+
+[1318095000 ns] ---> Sending Break: 13.0 LOW, 1.0 HIGH bits
+[1353935000 ns]      -> Sending Byte: 0x55
+  >>> [1353955000 ns] *** BREAK DETECTED! ***
+  >>> [1378265000 ns] --> BYTE RECEIVED: 0x55
+[1379535000 ns]      -> Sending Byte: 0xff
+  >>> [1403865000 ns] --> BYTE RECEIVED: 0xff
+
+[1417935000 ns] ---> Sending Break: 13.0 LOW, 1.0 HIGH bits
+[1453775000 ns]      -> Sending Byte: 0x55
+  >>> [1453795000 ns] *** BREAK DETECTED! ***
+  >>> [1478105000 ns] --> BYTE RECEIVED: 0x55
+[1479375000 ns]      -> Sending Byte: 0xa5
+  >>> [1503705000 ns] --> BYTE RECEIVED: 0xa5
+
+[1517775000 ns] ---> Sending Break: 13.0 LOW, 1.0 HIGH bits
+[1553615000 ns]      -> Sending Byte: 0x55
+  >>> [1553635000 ns] *** BREAK DETECTED! ***
+  >>> [1577945000 ns] --> BYTE RECEIVED: 0x55
+[1579215000 ns]      -> Sending Byte: 0x5a
+  >>> [1603545000 ns] --> BYTE RECEIVED: 0x5a
+
+========== TEST 11: Bus Stuck Low (Timeout Recovery) ==========
+[1630415000 ns] Simulating short to ground...
+[1720015000 ns] Bus recovered
+
+[1732815000 ns] ---> Sending Break: 13.0 LOW, 1.0 HIGH bits
+[1768655000 ns]      -> Sending Byte: 0x55
+  >>> [1768675000 ns] *** BREAK DETECTED! ***
+  >>> [1792985000 ns] --> BYTE RECEIVED: 0x55
+[1794255000 ns]      -> Sending Byte: 0x42
+  >>> [1818585000 ns] --> BYTE RECEIVED: 0x42
+
+========== TEST 12: Maximum Frame (8 Data Bytes) ==========
+
+[1845455000 ns] ---> Sending Break: 13.0 LOW, 1.0 HIGH bits
+[1881295000 ns]      -> Sending Byte: 0x55
+  >>> [1881315000 ns] *** BREAK DETECTED! ***
+  >>> [1905625000 ns] --> BYTE RECEIVED: 0x55
+[1906895000 ns]      -> Sending Byte: 0x01
+  >>> [1931225000 ns] --> BYTE RECEIVED: 0x01
+[1932495000 ns]      -> Sending Byte: 0x02
+  >>> [1956825000 ns] --> BYTE RECEIVED: 0x02
+[1958095000 ns]      -> Sending Byte: 0x03
+  >>> [1982425000 ns] --> BYTE RECEIVED: 0x03
+[1983695000 ns]      -> Sending Byte: 0x04
+  >>> [2008025000 ns] --> BYTE RECEIVED: 0x04
+[2009295000 ns]      -> Sending Byte: 0x05
+  >>> [2033625000 ns] --> BYTE RECEIVED: 0x05
+[2034895000 ns]      -> Sending Byte: 0x06
+  >>> [2059225000 ns] --> BYTE RECEIVED: 0x06
+[2060495000 ns]      -> Sending Byte: 0x07
+  >>> [2084825000 ns] --> BYTE RECEIVED: 0x07
+[2086095000 ns]      -> Sending Byte: 0x08
+  >>> [2110425000 ns] --> BYTE RECEIVED: 0x08
+
+========== TEST 13: Bus Noise Rejection ==========
+
+[2240975000 ns] ---> Sending Break: 13.0 LOW, 1.0 HIGH bits
+[2276815000 ns]      -> Sending Byte: 0x55
+  >>> [2276835000 ns] *** BREAK DETECTED! ***
+  >>> [2301145000 ns] --> BYTE RECEIVED: 0x55
+[2302415000 ns]      -> Sending Byte: 0xaa
+  >>> [2326745000 ns] --> BYTE RECEIVED: 0xaa
+
+========== TEST 14: Multiple Break Detection ==========
+
+[2353615000 ns] ---> Sending Break: 13.0 LOW, 1.0 HIGH bits
+  >>> [2392035000 ns] *** BREAK DETECTED! ***
+
+[2399695000 ns] ---> Sending Break: 14.0 LOW, 1.5 HIGH bits
+  >>> [2440675000 ns] *** BREAK DETECTED! ***
+
+[2449615000 ns] ---> Sending Break: 15.0 LOW, 2.0 HIGH bits
+  >>> [2493155000 ns] *** BREAK DETECTED! ***
+
+================================================================
+   FINAL STATISTICS
+================================================================
+ Total Breaks Detected:  17
+ Total Bytes Received:   39
+ Total Errors Caught:    2
+================================================================
+[PASS] Break detection working!
+[PASS] Byte reception working!
+$finish called at time : 2523855 ns : File "C:/Users/gokul/OneDrive/Documents/Documents/Electronics/6th sem/system verilog/PBL/NEW/LIN/tb/lin_rx_tb.sv" Line 237

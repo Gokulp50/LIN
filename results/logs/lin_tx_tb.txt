@@ -1,0 +1,25 @@
+================================================================
+   LIN PROTOCOL TRANSMITTER: Full Frame Simulation
+================================================================
+
+--- Starting Test 1: Sensor Frame ---
+[225000 ns] FSM -> TX_BREAK
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'lin_tx_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+run all
+[2265000 ns] FSM -> TX_BREAK_DELIM
+[2425000 ns] FSM -> TX_SYNC (0x55)
+[4025000 ns] FSM -> TX_PID
+  [TB-FEEDER] Pushing TX Data Byte 0: 0x0f
+[5625000 ns] FSM -> TX_DATA
+[7225000 ns] FSM -> TX_INTER_BYTE
+  [TB-FEEDER] Pushing TX Data Byte 1: 0x42
+[7385000 ns] FSM -> TX_DATA
+[8985000 ns] FSM -> TX_CHECKSUM
+[10585000 ns] FSM -> TX_DONE
+
+================================================================
+   TRANSMISSION COMPLETE! Open your Waveform Viewer!
+   You should see: Break -> 0x55 -> 0x21 -> 0x0F -> 0x42 -> 0x8D
+================================================================
+[10745000 ns] FSM -> TX_IDLE
