@@ -1,0 +1,24 @@
+# Coverage report assets
+**/.css/
+**/.js/
+**/.reportStyles/
+
+# Vivado
+.cache/
+.hw/
+.ip_user_files/
+.runs/
+.sim/
+.Xil/
+
+# XSIM
+xsim.dir/
+*.wdb
+
+# Logs
+*.jou
+*.str
+
+# OS
+Thumbs.db
+.DS_Store
